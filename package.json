@@ -1,0 +1,25 @@
+{
+  "name": "gps-sem-parser",
+  "version": "0.0.1",
+  "description": "parser for GPS almanach .sem files",
+  "keywords": [
+    "gps",
+    "almanach",
+    "sem",
+    "gnss",
+    "parser"
+  ],
+  "homepage": "",
+  "author": {
+    "name": "Ben Elsen",
+    "url": "http://benelsen.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benelsen/gps-sem-parser.git"
+  },
+  "main": "semParser.js",
+  "scripts": {
+  },
+  "license": "MIT"
+}
