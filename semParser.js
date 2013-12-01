@@ -1,18 +1,32 @@
 (function() {
   'use strict';
 
-  var semParser = function(file) {
+  var gpsTimeStart = new Date("1980-01-06T00:00:00.000Z").getTime();
 
-    var lines = file.split('\r\n');
+  var currentEpoch = Math.floor( (Date.now() - gpsTimeStart) / (1024 * 7*24*3600*1000) );
+
+  var semParser = function(file, gpsEpoch) {
+
+    if ( !gpsEpoch ) gpsEpoch = currentEpoch;
+
+    var lines = file.split(/[\r\n]+/);
+
+    var gpsWeek = parseInt( lines[1].slice(0,4) ),
+        toa     = parseInt( lines[1].slice(5) );
+
+    gpsWeek += gpsEpoch * 1024;
+
+    var epoch = gpsWeek * 7*24*3600 + toa;
 
     var orbits = {
-      gpsWeek: parseInt( lines[1].slice(0,4) ),
-      toa: parseInt( lines[1].slice(5) ),
+      gpsWeek: gpsWeek,
+      toa: toa,
+      epoch: epoch,
       satellites: []
     };
 
-    for (var i = 3; i < lines.length; i += 9) {
-      orbits.satellites.push( elementParser( lines.slice(i,i+9) ) );
+    for (var i = 2; i < lines.length-7; i += 8) {
+      orbits.satellites.push( elementParser( lines.slice(i,i+8) ) );
     }
 
     if ( parseInt( lines[0].slice(0,2) ) !== orbits.satellites.length ) {
