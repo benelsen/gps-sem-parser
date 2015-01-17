@@ -56,7 +56,7 @@
     sat.clockDrift = parseFloat( lines[5].slice(44,65) );
 
     sat.health = parseInt( lines[6] );
-    sat.config = parseInt( lines[7] ).toString(2);
+    sat.config = parseInt( lines[7] );
 
     return sat;
   }
