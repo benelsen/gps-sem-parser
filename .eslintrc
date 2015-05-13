@@ -1,0 +1,16 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+  },
+  "rules": {
+    "quotes": "single",
+    "comma-dangle": false,
+    "no-multi-spaces": false
+  },
+  "ecmaFeatures": {
+    "modules": true
+  }
+}

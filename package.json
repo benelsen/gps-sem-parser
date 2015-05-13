@@ -15,6 +15,19 @@
     "type": "git",
     "url": "https://github.com/benelsen/gps-sem-parser.git"
   },
-  "main": "index.js",
-  "license": "MIT"
+  "main": "lib/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.3.1",
+    "eslint": "^0.21.0",
+    "moment": "^2.10.3",
+    "pad": "0.0.8",
+    "tape": "^4.0.0"
+  },
+  "scripts": {
+    "build": "babel -d lib/ src/",
+    "test": "babel-node test/",
+    "lint": "eslint src/",
+    "prepublish": "npm run lint && npm run build && npm run test"
+  }
 }
