@@ -46,7 +46,7 @@ Return an `Almanac` object.
 | name | type | description |
 | ---- | ---- | ----------- |
 | `file` | `string` | Almanac in SEM format |
-| `gpsEpoch` | `number` | Number of times the GPS Week index rolled over. (currentEpoch being calculated from the current date) |
+| `gpsEpoch` | `number` | (optional) Number of times the GPS Week index rolled over. (currentEpoch being calculated from the current date) |
 
 ### `Almanac`
 
