@@ -6,7 +6,7 @@ var currentEpoch = Math.floor( (Date.now() - gpsTimeStart) / (1024 * 7*24*3600*1
 
 var semParser = function(file, gpsEpoch) {
 
-  if ( !gpsEpoch ) gpsEpoch = currentEpoch;
+  if ( !gpsEpoch && gpsEpoch !== 0 ) gpsEpoch = currentEpoch;
 
   var lines = file.split(/[\r\n]+/);
 
