@@ -1,6 +1,6 @@
 {
   "name": "gps-sem-parser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "parser for GPS almanac .sem files",
   "keywords": [
     "gps",
@@ -18,11 +18,11 @@
   "main": "lib/index.js",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.3.1",
-    "eslint": "^0.21.0",
-    "moment": "^2.10.3",
-    "pad": "0.0.8",
-    "tape": "^4.0.0"
+    "babel": "^5.8.29",
+    "eslint": "^1.7.3",
+    "moment": "^2.10.6",
+    "pad": "^1.0.0",
+    "tape": "^4.2.2"
   },
   "scripts": {
     "build": "babel -d lib/ src/",

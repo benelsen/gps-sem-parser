@@ -28,7 +28,7 @@
  * @property {number} config              Configuration of satellite
  */
 
-const gpsTimeStart = new Date("1980-01-06T00:00:00.000Z").getTime();
+const gpsTimeStart = new Date('1980-01-06T00:00:00.000Z').getTime();
 const currentEpoch = Math.floor( (Date.now() - gpsTimeStart) / (1024 * 7 * 86400 * 1e3) );
 
 /**

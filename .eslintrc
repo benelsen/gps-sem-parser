@@ -6,9 +6,9 @@
   "globals": {
   },
   "rules": {
-    "quotes": "single",
-    "comma-dangle": false,
-    "no-multi-spaces": false
+    "quotes": [2, "single", "avoid-escape"],
+    "comma-dangle": [2, "never"],
+    "no-multi-spaces": 2
   },
   "ecmaFeatures": {
     "modules": true
