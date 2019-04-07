@@ -38,6 +38,8 @@
 ### `sem(file, gpsEpoch)`
 
 Parses a string containing a GPS almanac in sem format.
+Pass `gpsEpoch` with the number of times the gps week has rolled over.
+Set `gpsEpoch` to `null` and `year` to the year in which the almanac was issued to try to automatically resolve the gps epoch. (Defaults to current year)
 
 Return an `Almanac` object.
 
@@ -46,7 +48,8 @@ Return an `Almanac` object.
 | name | type | description |
 | ---- | ---- | ----------- |
 | `file` | `string` | Almanac in SEM format |
-| `gpsEpoch` | `number` | (optional) Number of times the GPS Week index rolled over. (currentEpoch being calculated from the current date) |
+| `gpsEpoch` | `number` | (optional) Number of times the GPS Week index rolled over. |
+| `year` | `number` | (optional) Year in which the Almanac was issued (to resolve gps epoch). ) |
 
 ### `Almanac`
 
