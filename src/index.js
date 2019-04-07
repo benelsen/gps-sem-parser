@@ -40,7 +40,7 @@ const gpsTimeStart = new Date('1980-01-06T00:00:00.000Z').getTime();
  */
 export default function semParser (file, gpsEpoch = null, year = new Date().getUTCFullYear()) {
 
-  const lines = file.split(/[\r\n]+/);
+  const lines = file.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
   const match = /^\s*(\d{1,4})\s+(\d+)\s*/.exec(lines[1])
 
   const gpsWeekRelative = parseInt( match[1], 10 )

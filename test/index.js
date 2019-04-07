@@ -7,13 +7,14 @@ import pad from 'pad';
 
 import sem from '../src';
 
-const gpstimeOrigin = moment.utc("1980-01-06T00:00:00.000Z").unix();
-
 test('validate output', t => {
 
-  t.plan(7);
+  const testSems = fs.readdirSync('./test/data')
+    .map(file => file.split(/[-.]/))
+    .filter(file => file[2] == "sem")
+    .map(file => [parseInt(file[0]), parseInt(file[1])])
 
-  const testSems = [[1998, 15], [2007, 5], [2007, 256], [2007, 257], [2015, 132], [2019, 94], [2019, 95]];
+  t.plan(testSems.length);
 
   for (let [y,i] of testSems) {
 
