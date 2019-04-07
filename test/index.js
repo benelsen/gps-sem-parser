@@ -11,9 +11,9 @@ const gpstimeOrigin = moment.utc("1980-01-06T00:00:00.000Z").unix();
 
 test('validate output', t => {
 
-  t.plan(6);
+  t.plan(7);
 
-  const testSems = [[1998, 15], [2007, 256], [2007, 257], [2015, 132], [2019, 94], [2019, 95]];
+  const testSems = [[1998, 15], [2007, 5], [2007, 256], [2007, 257], [2015, 132], [2019, 94], [2019, 95]];
 
   for (let [y,i] of testSems) {
 
