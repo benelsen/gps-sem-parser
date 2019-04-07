@@ -33,12 +33,13 @@ const gpsTimeStart = new Date('1980-01-06T00:00:00.000Z').getTime();
 /**
  * Parses a string containing a GPS almanac in sem format
  * and returns it as an object.
- * @param  {string}  file                    Almanac in SEM format
- * @param  {number}  [gpsEpoch=null]         Number of times the GPS Week index rolled over.
- * @param  {number}  [year=null]             Year in which the Almanac was issued (to resolve gps epoch).
+ * @param  {string}   file                     Almanac in SEM format
+ * @param  {number}   [gpsEpoch=null]          Number of times the GPS Week index rolled over.
+ * @param  {number}   [year=null]              Year in which the Almanac was issued (to resolve gps epoch).
+ * @param  {boolean}  [errorOnCountDiff=false] Error when satellite count in the header differs from the count of satellites in the body.
  * @returns {Almanac}
  */
-export default function semParser (file, gpsEpoch = null, year = new Date().getUTCFullYear()) {
+export default function semParser (file, gpsEpoch = null, year = new Date().getUTCFullYear(), errorOnCountDiff = false) {
 
   const lines = file.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
   const match = /^\s*(\d{1,4})\s+(\d+)\s*/.exec(lines[1])
@@ -73,8 +74,13 @@ export default function semParser (file, gpsEpoch = null, year = new Date().getU
     orbits.satellites.push( elementParser( lines.slice(i, i + 8) ) );
   }
 
-  if ( parseInt( lines[0].slice(0, 2), 10 ) !== orbits.satellites.length ) {
-    throw new Error('Satellite count mismatch!');
+  const satCount = parseInt( lines[0].slice(0, 2), 10 )
+  if ( satCount !== orbits.satellites.length ) {
+    if (errorOnCountDiff) {
+      throw new Error('Satellite count mismatch! ' + satCount + ' ≠ ' + orbits.satellites.length);
+    } else {
+      console.info('Satellite count mismatch! ' + satCount + ' ≠ ' + orbits.satellites.length)
+    }
   }
 
   return orbits;

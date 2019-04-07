@@ -21,6 +21,10 @@ test('validate output', t => {
     const rawAlmanac = fs.readFileSync( path.join(__dirname, `data/${y}-${pad(3, i, '0')}.sem`), 'utf8');
     const result = sem(rawAlmanac, null, y);
 
+    // if ( !fs.existsSync(path.join(__dirname, `data/${y}-${pad(3, i, '0')}.json`)) ) {
+    //     fs.writeFileSync( path.join(__dirname, `data/${y}-${pad(3, i, '0')}.json`), JSON.stringify(result, null, 2), 'utf8')
+    // }
+
     const refAlmanac = JSON.parse(fs.readFileSync( path.join(__dirname, `data/${y}-${pad(3, i, '0')}.json`), 'utf8' ));
     t.deepEqual(result, refAlmanac);
   }
