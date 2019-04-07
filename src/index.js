@@ -35,16 +35,31 @@ const currentEpoch = Math.floor( (Date.now() - gpsTimeStart) / (1024 * 7 * 86400
  * Parses a string containing a GPS almanac in sem format
  * and returns it as an object.
  * @param  {string}  file                    Almanac in SEM format
- * @param  {number}  [gpsEpoch=currentEpoch] Number of times the GPS Week index rolled over.
- *                                           (currentEpoch being calculated from the current date)
+ * @param  {number}  [gpsEpoch=null]         Number of times the GPS Week index rolled over.
+ * @param  {number}  [year=null]             Year in which the Almanac was issued (to resolve gps epoch).
  * @returns {Almanac}
  */
-export default function semParser (file, gpsEpoch = currentEpoch) {
+export default function semParser (file, gpsEpoch = null, year = new Date().getUTCFullYear()) {
 
   const lines = file.split(/[\r\n]+/);
+  const match = /\s*(\d{1,4}) (\d+)\s*/.exec(lines[1])
 
-  const gpsWeek = parseInt( lines[1].slice(0, 4), 10 ) + gpsEpoch * 1024;
-  const toa = parseInt( lines[1].slice(5), 10 );
+  const gpsWeekRelative = parseInt( match[1], 10 )
+
+  if (gpsEpoch === null) {
+
+    const gpsWeekStartOfYear = Math.floor((Date.UTC(year, 0, 1) - gpsTimeStart) / (7 * 86400 * 1e3))
+
+    let gpsEpochProposal = 0
+    while ((gpsWeekRelative + gpsEpochProposal * 1024) < gpsWeekStartOfYear) {
+      gpsEpochProposal++
+    }
+
+    gpsEpoch = gpsEpochProposal
+  }
+
+  const gpsWeek = gpsWeekRelative + gpsEpoch * 1024;
+  const toa = parseInt( match[2], 10 );
 
   const epoch = gpsWeek * 7 * 86400 + toa;
 

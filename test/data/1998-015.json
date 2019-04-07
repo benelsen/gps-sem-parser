@@ -1,7 +1,7 @@
 {
   "gpsWeek": 940,
-  "toa": 89824,
-  "epoch": 568601824,
+  "toa": 589824,
+  "epoch": 569101824,
   "satellites": [
     {
       "prn": 1,
